@@ -15,7 +15,7 @@ class PredictPipeline:
 
     def predict(self,features):
         try:
-            model_path=os.path.join("artifacts","model.pkl")
+            model_path=os.path.join("artifacts","modelo_mlp.pkl")
             
             model=load_object(file_path=model_path)
             
@@ -24,7 +24,7 @@ class PredictPipeline:
             preprocessor = DataTransformation()
 
             logging.info("Preprocessor created")
-
+            
             data_scaled=preprocessor.initiate_data_transformation(features)
            
             logging.info("Data transformed")
@@ -51,7 +51,7 @@ class CustomData:
             custom_data_input_dict = {
                 "Number": [self.Number],
             }
-
+            
             return pd.DataFrame(custom_data_input_dict)
 
         except Exception as e:

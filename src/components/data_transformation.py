@@ -17,19 +17,22 @@ class DataTransformationConfig:
 class DataTransformation:
     def __init__(self):
         self.data_transformation_config=DataTransformationConfig()
-        num_digits:int = 10 
+        self.num_digits:int = 10 
 
 
     # Function to convert numbers to their binary representation
-    def binary_encode(i, num_digits):
-        return np.array([i >> d & 1 for d in range(num_digits)])
+    def binary_encode(self, i):
+        return np.array([i >> d & 1 for d in range(self.num_digits)])
 
 
-    # Function to transform initial dataframe V1 into dtaframe V2
+    # Function to transform initial dataframe V1 into dataframe V2
     def initiate_data_transformation(self,df:pd.DataFrame):
         try:
+            # Convert the 'Number' column to integers
+            df['Number'] = df['Number'].astype(int)
+            
             # Applying the binary encoding function to the 'Number' column
-            binary_representation = df['Number'].apply(lambda x: self.binary_encode(x, self.num_digits))
+            binary_representation = df['Number'].apply(lambda x: self.binary_encode(x))
             
             logging.info("Number converted to binary")
 
@@ -38,12 +41,7 @@ class DataTransformation:
 
             logging.info("Binary columns created")
 
-            # Concatenating the binary DataFrame with the original
-            data_v1_transformed = pd.concat([df, binary_df_v1], axis=1)
-
-            logging.info("New dataframe concatenated")
-
-            return data_v1_transformed
+            return binary_df_v1
         
         except Exception as e:
             raise CustomException(e,sys)
