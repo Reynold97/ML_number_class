@@ -6,8 +6,10 @@ import pandas as pd
 from src.pipe.predict_pipeline import CustomData,PredictPipeline
 from src.logger import logging
 from src.exception import CustomException
+from src.utils import load_object
 
 import sys
+import os
 
 # Define the Streamlit app
 def main():
@@ -64,8 +66,17 @@ def main():
                 
                 logging.info("Prediction ready")
 
+                encoder_path=os.path.join("artifacts","encoder.pkl")      
+                encoder=load_object(file_path=encoder_path)
+
+                logging.info("Encoder loaded")
+
+                dec_pred = encoder.inverse_transform(prediction)
+
+                logging.info("Decoded prediction ready")
+
                 # Display the prediction
-                st.markdown(f"<p class='big-font main'>{prediction[0]}</p>", unsafe_allow_html=True)
+                st.markdown(f"<p class='big-font main'>{dec_pred[0]}</p>", unsafe_allow_html=True)
             else:
                 st.markdown("<p class='text-font'>Invalid input. Please enter a valid integer less than or equal to 1024.</p>", unsafe_allow_html=True)
         except Exception as e:
