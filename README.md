@@ -44,11 +44,11 @@ Clone the repository
 
 Navigate to the project directory
 
-Install dependencies using pip install -r requirements.txt
+Install dependencies using:  pip install -r requirements.txt
 
-Run the application with streamlit run app.py
+Run the application with:  streamlit run app.py
 
-Open a browser and navigate to http://localhost:8501
+Open a browser and navigate to:  http://localhost:8501
 
 ### Execution with Docker
 
@@ -56,8 +56,8 @@ Clone the repository
 
 Navigate to the project directory
 
-Build the Docker image with docker build -t my-streamlit-app .
+Build the Docker image with:  docker build -t my-streamlit-app .
 
-Run the container with docker run -p 8501:8501 my-streamlit-app
+Run the container with:  docker run -p 8501:8501 my-streamlit-app
 
-Open a browser and navigate to http://localhost:8501
+Open a browser and navigate to:  http://localhost:8501
